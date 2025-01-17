@@ -24,7 +24,7 @@ export function RecipeCard ({recipe, addFavorite, addMakeRecipe, favorites}: Rec
       <Grid
           sx={{
             width: isMobile ? {xs: "100%",
-            sm: "50%"} : "370px",
+            sm: "66.67%"} : "370px", //might change sm to 50%
             boxShadow: 6,
             margin: 4,
             padding: 2,
