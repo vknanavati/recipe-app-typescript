@@ -1,11 +1,10 @@
 import React from 'react';
-import {Typography, Button } from '@mui/material';
+import { Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import IconButton from '@mui/joy/IconButton';
 import { FavoriteOutlined } from '@mui/icons-material';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import { Recipe } from '../types'
-
 interface RecipeCardProps {
     recipe: Recipe
     addFavorite: (recipe: Recipe) => void
@@ -15,19 +14,21 @@ interface RecipeCardProps {
 
 export function RecipeCard ({recipe, addFavorite, addMakeRecipe, favorites}: RecipeCardProps) {
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const isFavorite = favorites && favorites.some(item => item.label === recipe.label);
 
   // console.log("recipe", recipe)
   return (
       <Grid
           sx={{
-            xs: "100%",
-            sm: "50%",
+            width: isMobile ? {xs: "100%",
+            sm: "50%"} : "370px",
             boxShadow: 6,
             margin: 4,
             padding: 2,
             textAlign: "center",
-            width: "370px",
             height: "auto",
             borderRadius: 3,
             backgroundColor: "white"
