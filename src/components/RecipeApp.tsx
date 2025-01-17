@@ -2,12 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { AppBar, Container,Toolbar, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
 import { Link, Outlet } from 'react-router-dom';
-
-interface Recipe {
-    name: string
-    ingredients: string[]
-}
-
+import { Recipe } from '../types'
 interface RecipeAppProps {
     makeRecipe: Recipe[]
     favorites: Recipe[]
