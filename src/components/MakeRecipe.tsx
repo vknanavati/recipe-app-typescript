@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { makeRecipe, AddGrocery, GroceryList, FilteredRecipe, AddMakeRecipe, Notes, NotesList, SetFilteredRecipe, SetNotesList, SetNotes } from '../types'
+import { makeRecipe, AddGrocery, GroceryList, FilteredRecipe, AddMakeRecipe, Notes, NotesList, SetFilteredRecipe, SetNotesList, SetNotes, HandleSubmit, HandleNoteChange, HandleRemoveNote } from '../types'
 import { DisplayFiltered } from './DisplayFiltered';
 import { FirstRecipe } from './FirstRecipe';
 import Grid from '@mui/material/Grid2';
@@ -19,6 +19,9 @@ interface MakeRecipeProps {
     setFilteredRecipe: SetFilteredRecipe
     setNotesList: SetNotesList
     setNotes: SetNotes
+    handleSubmit: HandleSubmit
+    handleNoteChange: HandleNoteChange
+    handleRemoveNote: HandleRemoveNote
 }
 export function MakeRecipe({
     makeRecipe,
@@ -58,13 +61,13 @@ export function MakeRecipe({
         console.log("filtered:", filtered);
     }
 
-    const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNoteChange: HandleNoteChange = (e) => {
         const input = e.target.value
         setNotes(input)
         console.log("NOTES: ", notes)
     }
     // recipe is the recipe name
-    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>, recipe: string) => {
+    const handleSubmit: HandleSubmit = (e, recipe) => {
         e.preventDefault();
         setNotes("");
 
@@ -80,7 +83,7 @@ export function MakeRecipe({
         })
     }
 
-    const handleRemoveNote = (note: string, recipe: string) =>{
+    const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
 
      setNotesList((notesObject)=>{
 
@@ -187,10 +190,10 @@ export function MakeRecipe({
                 )}
 
                 {filteredRecipe.length > 0 && makeRecipe && (
-                    filteredRecipe.map((makeRecipe, index)=> (
+                    filteredRecipe.map((recipeChoice, index)=> (
                         <DisplayFiltered
                             key={index}
-                            makeRecipe={makeRecipe}
+                            makeRecipe={recipeChoice}
                             groceryList={groceryList}
                             addGrocery={addGrocery}
                             notes={notes}
