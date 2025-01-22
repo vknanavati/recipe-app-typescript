@@ -13,3 +13,26 @@ export interface Ingredient {
   }
 
   export type AddGrocery = (recipeName: string, ingredient: string) => void
+
+  export type makeRecipe = Recipe[]
+
+  export type AddMakeRecipe = (recipe: Recipe) => void
+
+  export type Notes = string
+
+  export interface NotesList {
+    [key: string]: Notes[]
+  }
+
+  export type FilteredRecipe = Recipe[]
+
+  export type SetFilteredRecipe = React.Dispatch<React.SetStateAction<Recipe[]>>
+
+  export type SetNotesList = React.Dispatch<React.SetStateAction<NotesList>>
+
+  export type SetNotes = React.Dispatch<React.SetStateAction<Notes>>
+
+  export type HandleSubmit = (e: React.ChangeEvent<HTMLInputElement>, recipe: string) => void
+
+  export type HandleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => void
+
