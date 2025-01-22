@@ -32,7 +32,9 @@ export interface Ingredient {
 
   export type SetNotes = React.Dispatch<React.SetStateAction<Notes>>
 
-  export type HandleSubmit = (e: React.ChangeEvent<HTMLInputElement>, recipe: string) => void
+  export type HandleSubmit = (e: React.FormEvent<HTMLFormElement>, recipe: string) => void
 
-  export type HandleNoteChange = (e: React.ChangeEvent<HTMLInputElement>) => void
+  export type HandleNoteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+
+  export type HandleRemoveNote = (note: string, recipe: string) => void
 
