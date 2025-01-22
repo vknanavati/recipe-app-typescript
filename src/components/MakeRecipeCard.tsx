@@ -1,7 +1,7 @@
 import React from 'react';
 import { Recipe, AddGrocery, GroceryList } from '../types';
 import Grid from '@mui/material/Grid2';
-import { Typography, useTheme, useMediaQuery } from '@mui/material'
+import { Typography, useTheme, useMediaQuery, SxProps, Theme } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import IconButton from '@mui/joy/IconButton';
@@ -10,6 +10,7 @@ interface MakeRecipeCardProps {
     recipe: Recipe
     addGrocery: AddGrocery
     groceryList: GroceryList
+    sx?: SxProps<Theme>
 }
 export function MakeRecipeCard({recipe, addGrocery, groceryList}: MakeRecipeCardProps) {
 
