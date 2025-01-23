@@ -1,22 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Recipe } from '../types';
+import { Recipe, Hits, FoodData } from '../types';
 import { Button, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { RecipeCard } from './RecipeCard';
-
-interface Hits {
-    recipe: Recipe
-}
-
-interface FoodData {
-    hits: Hits[]
-    _links: {
-        next: {
-          href: string;
-        };
-    }
-}
 
 interface HomeRecipeProps {
     recipeData: Hits[]
@@ -52,7 +39,7 @@ export function HomeRecipe({
       .then(data => {
           console.log("My recipe data: ", data);
           setFoodData(data);
-          setRecipeData(data.hits);
+          setRecipeData(data.hits.map((hit: Hits) => hit.recipe));
       })
       .catch(error => console.error("Error:", error))
     }
@@ -64,7 +51,7 @@ export function HomeRecipe({
       })
       .then(response => response.json())
       .then(data =>{
-          console.log("My recipe data: ", data);
+          console.log("My data: ", data);
           setFoodData(data);
           setRecipeData([...recipeData, ...data.hits]);
       })
