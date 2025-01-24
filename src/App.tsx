@@ -1,21 +1,26 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {Link, Routes, Route} from 'react-router-dom';
-import {RecipeApp} from './components/RecipeApp';
-import {Favorites} from './components/Favorites';
-import {MakeRecipe} from './components/recipe/MakeRecipe';
-import {AboutRecipe} from './components/AboutRecipe';
-import {HomeRecipe} from './components/recipe/HomeRecipe';
-import {Recipe, AddGrocery, GroceryList} from './types';
-
-import {AppBar, Toolbar, Box, Container, Typography, Alert, AlertTitle, Button, Drawer, ListItem, ListItemButton,ListItemText, List, useTheme, useMediaQuery} from '@mui/material';
+import { Link, Routes, Route } from 'react-router-dom';
+import { RecipeApp } from './components/RecipeApp';
+import { Favorites } from './components/Favorites';
+import { MakeRecipe } from './components/MakeRecipe';
+import { AboutRecipe } from './components/AboutRecipe';
+import { HomeRecipe } from './components/HomeRecipe';
+import { Recipe, AddGrocery, GroceryList, AddMakeRecipe, FoodData, Hits } from './types';
+import { AppBar, Toolbar, Box, Container, Typography, Alert, AlertTitle, Button, Drawer, ListItem, ListItemButton, ListItemText, List, useTheme, useMediaQuery } from '@mui/material';
 
 const App: React.FC = () => {
 
-  const [foodData, setFoodData] = useState([]);
-  const [recipeData, setRecipeData] = useState([]);
+  const [foodData, setFoodData] = useState<FoodData>({
+    hits: [],
+    _links: {
+      next: {
+        href: ""
+      }},
+  });
+  const [recipeData, setRecipeData] = useState<Hits[]>([]);
   const [groceryList, setGroceryList] = useState({});
-  const [filteredRecipe, setFilteredRecipe] = useState([]);
+  const [filteredRecipe, setFilteredRecipe] = useState<Recipe[]>([]);
   const [alertFavorite, setAlertFavorite] = useState(false);
   const [alertRemove, setAlertRemove] = useState(false);
   const [alertRecipe, setAlertRecipe] = useState(false)
@@ -134,7 +139,7 @@ const App: React.FC = () => {
     console.log("favorites:", JSON.stringify(favorites))
   };
 
-  const addMakeRecipe = (recipe: Recipe): void => {
+  const addMakeRecipe: AddMakeRecipe = (recipe: Recipe): void => {
     if (!(makeRecipe.filter((item: Recipe) => item.label === recipe.label).length > 0)){
       setMakeRecipe([...makeRecipe, recipe]);
       setAlertRecipe(true);
@@ -154,7 +159,7 @@ const App: React.FC = () => {
   };
 
   // onClick={() => addGrocery(recipe.label, ingredient.food)}
-  const addGrocery: AddGrocery = (recipeName, ingredient) => {
+  const addGrocery: AddGrocery = (recipeName: string, ingredient: string) => {
 
     setGroceryList((groceryObject: GroceryList)=>{
 
@@ -331,7 +336,7 @@ const App: React.FC = () => {
           onClose={() => setAlertFavorite(false)}
           sx={{
             position: "fixed",
-            top: "30px",// 20px from the top of the screen
+            top: "30px",
             left: "50%", //left edge of alert at half the viewport width
             transform: "translateX(-50%)", // moves alert to the left at half the width of the alert box
             width: "auto", // adjust width based on content
@@ -347,11 +352,11 @@ const App: React.FC = () => {
           severity="success"
           sx={{
             position: "fixed",
-            top: "30px",// 20px from the top of the screen
-            left: "50%", //left edge of alert at half the viewport width
-            transform: "translateX(-50%)", // moves alert to the left at half the width of the alert box
-            width: "auto", // adjust width based on content
-            zIndex: 9999 // alert appears above other content
+            top: "30px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "auto",
+            zIndex: 9999
           }}
         >
           <AlertTitle>Success</AlertTitle>
@@ -364,11 +369,11 @@ const App: React.FC = () => {
           onClose={() => setAlertFavorite(false)}
           sx={{
             position: "fixed",
-            top: "30px",// 20px from the top of the screen
-            left: "50%", //left edge of alert at half the viewport width
-            transform: "translateX(-50%)", // moves alert to the left at half the width of the alert box
-            width: "auto", // adjust width based on content
-            zIndex: 9999 // alert appears above other content
+            top: "30px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "auto",
+            zIndex: 9999
           }}
         >
           Removed Recipe
