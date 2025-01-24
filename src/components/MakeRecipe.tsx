@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { makeRecipe, AddGrocery, GroceryList, FilteredRecipe, AddMakeRecipe, Notes, NotesList, SetFilteredRecipe, SetNotesList, SetNotes, HandleSubmit, HandleNoteChange, HandleRemoveNote } from '../types'
+import { makeRecipe, AddGrocery, GroceryList, FilteredRecipe, AddMakeRecipe, Notes, NotesList, SetFilteredRecipe, HandleSubmit, HandleNoteChange, HandleRemoveNote } from '../types'
 import { DisplayFiltered } from './DisplayFiltered';
 import { FirstRecipe } from './FirstRecipe';
 import Grid from '@mui/material/Grid2';
@@ -17,8 +17,6 @@ interface MakeRecipeProps {
     notes: Notes
     notesList: NotesList
     setFilteredRecipe: SetFilteredRecipe
-    setNotesList: SetNotesList
-    setNotes: SetNotes
     handleSubmit: HandleSubmit
     handleNoteChange: HandleNoteChange
     handleRemoveNote: HandleRemoveNote
@@ -30,10 +28,11 @@ export function MakeRecipe({
     filteredRecipe,
     setFilteredRecipe,
     notes,
-    setNotesList,
-    setNotes,
     notesList,
-    addMakeRecipe}: MakeRecipeProps) {
+    addMakeRecipe,
+    handleSubmit,
+    handleNoteChange,
+    handleRemoveNote}: MakeRecipeProps) {
 
     const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -61,42 +60,42 @@ export function MakeRecipe({
         console.log("filtered:", filtered);
     }
 
-    const handleNoteChange: HandleNoteChange = (e) => {
-        const input = e.target.value
-        setNotes(input)
-        console.log("NOTES: ", notes)
-    }
-    // recipe is the recipe name
-    const handleSubmit: HandleSubmit = (e, recipe) => {
-        e.preventDefault();
-        setNotes("");
+    // const handleNoteChange: HandleNoteChange = (e) => {
+    //     const input = e.target.value
+    //     setNotes(input)
+    //     console.log("NOTES: ", notes)
+    // }
+    // // recipe is the recipe name
+    // const handleSubmit: HandleSubmit = (e, recipe) => {
+    //     e.preventDefault();
+    //     setNotes("");
 
-        setNotesList((notesObject) => {
-            //currentNotes is the value for the key recipe
-            //this checks if recipe exists in notesObject. If yes it returns the value if not truthy it sets value to empty brackets
-            const currentNotes = notesObject[recipe] || [];
-            console.log("currentNotes: ", currentNotes);
-            console.log("notesObject", notesObject)
-            console.log("recipe passed to handleSubmit: ", recipe)
+    //     setNotesList((notesObject) => {
+    //         //currentNotes is the value for the key recipe
+    //         //this checks if recipe exists in notesObject. If yes it returns the value if not truthy it sets value to empty brackets
+    //         const currentNotes = notesObject[recipe] || [];
+    //         console.log("currentNotes: ", currentNotes);
+    //         console.log("notesObject", notesObject)
+    //         console.log("recipe passed to handleSubmit: ", recipe)
 
-            return {...notesObject, [recipe] : [...currentNotes, notes]}
-        })
-    }
+    //         return {...notesObject, [recipe] : [...currentNotes, notes]}
+    //     })
+    // }
 
-    const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
+    // const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
 
-     setNotesList((notesObject)=>{
+    //  setNotesList((notesObject)=>{
 
-        const currentNotes = notesObject[recipe] || [];
-        //create new array of notes without the note to be deleted
-        const updatedNotes = currentNotes.filter((item)=> item !== note)
-        console.log("note removed handleRemoveNote: ", note);
-        console.log("recipe in handleRemoveNote: ", recipe);
-        //set updatedNotes for the recipe passed through function
-        return {...notesObject, [recipe]: updatedNotes}
+    //     const currentNotes = notesObject[recipe] || [];
+    //     //create new array of notes without the note to be deleted
+    //     const updatedNotes = currentNotes.filter((item)=> item !== note)
+    //     console.log("note removed handleRemoveNote: ", note);
+    //     console.log("recipe in handleRemoveNote: ", recipe);
+    //     //set updatedNotes for the recipe passed through function
+    //     return {...notesObject, [recipe]: updatedNotes}
 
-     })
-    }
+    //  })
+    // }
 
     return (
         <Container sx={{ paddingTop: "170px" }}>
