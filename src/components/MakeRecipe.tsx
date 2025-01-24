@@ -60,43 +60,6 @@ export function MakeRecipe({
         console.log("filtered:", filtered);
     }
 
-    // const handleNoteChange: HandleNoteChange = (e) => {
-    //     const input = e.target.value
-    //     setNotes(input)
-    //     console.log("NOTES: ", notes)
-    // }
-    // // recipe is the recipe name
-    // const handleSubmit: HandleSubmit = (e, recipe) => {
-    //     e.preventDefault();
-    //     setNotes("");
-
-    //     setNotesList((notesObject) => {
-    //         //currentNotes is the value for the key recipe
-    //         //this checks if recipe exists in notesObject. If yes it returns the value if not truthy it sets value to empty brackets
-    //         const currentNotes = notesObject[recipe] || [];
-    //         console.log("currentNotes: ", currentNotes);
-    //         console.log("notesObject", notesObject)
-    //         console.log("recipe passed to handleSubmit: ", recipe)
-
-    //         return {...notesObject, [recipe] : [...currentNotes, notes]}
-    //     })
-    // }
-
-    // const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
-
-    //  setNotesList((notesObject)=>{
-
-    //     const currentNotes = notesObject[recipe] || [];
-    //     //create new array of notes without the note to be deleted
-    //     const updatedNotes = currentNotes.filter((item)=> item !== note)
-    //     console.log("note removed handleRemoveNote: ", note);
-    //     console.log("recipe in handleRemoveNote: ", recipe);
-    //     //set updatedNotes for the recipe passed through function
-    //     return {...notesObject, [recipe]: updatedNotes}
-
-    //  })
-    // }
-
     return (
         <Container sx={{ paddingTop: "170px" }}>
 
