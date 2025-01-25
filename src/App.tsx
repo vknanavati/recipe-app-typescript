@@ -6,6 +6,7 @@ import { Favorites } from './components/Favorites';
 import { MakeRecipe } from './components/MakeRecipe';
 import { AboutRecipe } from './components/AboutRecipe';
 import { HomeRecipe } from './components/HomeRecipe';
+import { Wallpaper } from './components/Wallpaper';
 import { Recipe, AddGrocery, GroceryList, AddMakeRecipe, FoodData, Hits, HandleSubmit, HandleNoteChange, HandleRemoveNote } from './types';
 import { AppBar, Toolbar, Box, Container, Typography, Alert, AlertTitle, Button, Drawer, ListItem, ListItemButton, ListItemText, List, useTheme, useMediaQuery } from '@mui/material';
 
@@ -28,7 +29,6 @@ const App: React.FC = () => {
   const [notesList, setNotesList] = useState<{ [key:string]: string[] }>({});
   const [open, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
-
 
   const projects = [
 
@@ -224,7 +224,6 @@ const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
  })
 }
 
-
   return (
     <Container disableGutters>
       <AppBar
@@ -419,58 +418,47 @@ const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
         </Alert>
       )}
       <Wallpaper>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-
-        <Route path="/recipe" element={<RecipeApp favorites={favorites} makeRecipe={makeRecipe}/>}>
-          <Route path="aboutRecipe" element={<AboutRecipe/>}/>
-          <Route
-            path="homeRecipe"
-            element={
-              <HomeRecipe
-                addFavorite={addFavorite}
-                foodData={foodData}
-                setFoodData={setFoodData}
-                addMakeRecipe={addMakeRecipe}
-                favorites={favorites}
-                recipeData={recipeData}
-                setRecipeData={setRecipeData}
-              />
-            }
-          />
-          <Route path="favorites" element={
-            <Favorites
-              favorites={favorites}
-              addFavorite={addFavorite}
-              addMakeRecipe={addMakeRecipe}/>
+        <Routes>
+          <Route path="/recipe" element={<RecipeApp favorites={favorites} makeRecipe={makeRecipe}/>}>
+            <Route path="aboutRecipe" element={<AboutRecipe/>}/>
+            <Route
+              path="homeRecipe"
+              element={
+                <HomeRecipe
+                  addFavorite={addFavorite}
+                  foodData={foodData}
+                  setFoodData={setFoodData}
+                  addMakeRecipe={addMakeRecipe}
+                  favorites={favorites}
+                  recipeData={recipeData}
+                  setRecipeData={setRecipeData}
+                />
               }
             />
-          <Route path="make" element={
-            <MakeRecipe
-              makeRecipe={makeRecipe}
-              addGrocery={addGrocery}
-              groceryList={groceryList}
-              filteredRecipe={filteredRecipe}
-              setFilteredRecipe={setFilteredRecipe}
-              notes={notes}
-              notesList={notesList}
-              addMakeRecipe={addMakeRecipe}
-              handleSubmit={handleSubmit}
-              handleNoteChange={handleNoteChange}
-              handleRemoveNote={handleRemoveNote}
-            />
-          }/>
-        </Route>
-
-        <Route path="/hostel" element={<Hostel/>}/>
-        <Route path="/todo" element={<ToDoList/>}/>
-        <Route path="/weather" element={<Weather/>}/>
-        <Route path="/currency" element={<CurrencyTwo/>}/>
-        <Route path="/countdown" element={<Countdown/>}/>
-        <Route path="/counter" element={<Counter/>}/>
-
-      </Routes>
+            <Route path="favorites" element={
+              <Favorites
+                favorites={favorites}
+                addFavorite={addFavorite}
+                addMakeRecipe={addMakeRecipe}/>
+                }
+              />
+            <Route path="make" element={
+              <MakeRecipe
+                makeRecipe={makeRecipe}
+                addGrocery={addGrocery}
+                groceryList={groceryList}
+                filteredRecipe={filteredRecipe}
+                setFilteredRecipe={setFilteredRecipe}
+                notes={notes}
+                notesList={notesList}
+                addMakeRecipe={addMakeRecipe}
+                handleSubmit={handleSubmit}
+                handleNoteChange={handleNoteChange}
+                handleRemoveNote={handleRemoveNote}
+              />
+            }/>
+          </Route>
+        </Routes>
       </Wallpaper>
     </Container>
   );
