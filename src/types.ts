@@ -1,4 +1,4 @@
-export interface Ingredient {
+  export interface Ingredient {
     food: string
   }
   export interface Recipe {
@@ -52,4 +52,3 @@ export interface FoodData {
 }
 
 export type RecipeData = Hits[]
-
