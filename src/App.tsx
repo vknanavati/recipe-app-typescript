@@ -6,7 +6,7 @@ import { Favorites } from './components/Favorites';
 import { MakeRecipe } from './components/MakeRecipe';
 import { AboutRecipe } from './components/AboutRecipe';
 import { HomeRecipe } from './components/HomeRecipe';
-import { Recipe, AddGrocery, GroceryList, AddMakeRecipe, FoodData, Hits } from './types';
+import { Recipe, AddGrocery, GroceryList, AddMakeRecipe, FoodData, Hits, HandleSubmit, HandleNoteChange, HandleRemoveNote } from './types';
 import { AppBar, Toolbar, Box, Container, Typography, Alert, AlertTitle, Button, Drawer, ListItem, ListItemButton, ListItemText, List, useTheme, useMediaQuery } from '@mui/material';
 
 const App: React.FC = () => {
@@ -25,9 +25,10 @@ const App: React.FC = () => {
   const [alertRemove, setAlertRemove] = useState(false);
   const [alertRecipe, setAlertRecipe] = useState(false)
   const [notes, setNotes] = useState("");
-  const [notesList, setNotesList] = useState({});
+  const [notesList, setNotesList] = useState<{ [key:string]: string[] }>({});
   const [open, setOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+
 
   const projects = [
 
@@ -185,6 +186,44 @@ const App: React.FC = () => {
       }
     });
   };
+
+  const handleNoteChange: HandleNoteChange = (e) => {
+    const input = e.target.value
+    setNotes(input)
+    console.log("NOTES: ", notes)
+}
+// recipe is the recipe name
+const handleSubmit: HandleSubmit = (e, recipe) => {
+    e.preventDefault();
+    setNotes("");
+
+    setNotesList((notesObject) => {
+        //currentNotes is the value for the key recipe
+        //this checks if recipe exists in notesObject. If yes it returns the value if not truthy it sets value to empty brackets
+        const currentNotes = notesObject[recipe] || [];
+        console.log("currentNotes: ", currentNotes);
+        console.log("notesObject", notesObject)
+        console.log("recipe passed to handleSubmit: ", recipe)
+
+        return {...notesObject, [recipe] : [...currentNotes, notes]}
+    })
+}
+
+const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
+
+ setNotesList((notesObject)=>{
+
+    const currentNotes = notesObject[recipe] || [];
+    //create new array of notes without the note to be deleted
+    const updatedNotes = currentNotes.filter((item)=> item !== note)
+    console.log("note removed handleRemoveNote: ", note);
+    console.log("recipe in handleRemoveNote: ", recipe);
+    //set updatedNotes for the recipe passed through function
+    return {...notesObject, [recipe]: updatedNotes}
+
+ })
+}
+
 
   return (
     <Container disableGutters>
@@ -414,11 +453,12 @@ const App: React.FC = () => {
               groceryList={groceryList}
               filteredRecipe={filteredRecipe}
               setFilteredRecipe={setFilteredRecipe}
-              setNotes={setNotes}
               notes={notes}
               notesList={notesList}
-              setNotesList={setNotesList}
               addMakeRecipe={addMakeRecipe}
+              handleSubmit={handleSubmit}
+              handleNoteChange={handleNoteChange}
+              handleRemoveNote={handleRemoveNote}
             />
           }/>
         </Route>
