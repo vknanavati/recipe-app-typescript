@@ -3,7 +3,11 @@ import { ReactNode } from 'react';
 import {Box} from '@mui/material';
 import BACKGROUND from '../images/background.png'
 
-export function Wallpaper({children}) {
+interface WallpaperProps {
+    children: ReactNode
+}
+
+export function Wallpaper({children}: WallpaperProps) {
     return (
         <Box
         sx={{
