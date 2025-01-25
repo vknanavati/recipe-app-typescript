@@ -1,13 +1,13 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Recipe, Hits, FoodData } from '../types';
+import { Recipe, Hits, FoodData, RecipeData } from '../types';
 import { Button, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { RecipeCard } from './RecipeCard';
 
 interface HomeRecipeProps {
     recipeData: Hits[]
-    setRecipeData: (data: Recipe[]) => void
+    setRecipeData: (data: RecipeData) => void
     addFavorite: (recipe: Recipe) => void
     foodData: FoodData
     setFoodData: (data: FoodData) => void
@@ -39,7 +39,7 @@ export function HomeRecipe({
       .then(data => {
           console.log("My recipe data: ", data);
           setFoodData(data);
-          setRecipeData(data.hits.map((hit: Hits) => hit.recipe));
+          setRecipeData(data.hits);
       })
       .catch(error => console.error("Error:", error))
     }
