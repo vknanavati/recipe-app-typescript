@@ -38,3 +38,18 @@ export interface Ingredient {
 
   export type HandleRemoveNote = (note: string, recipe: string) => void
 
+  export interface Hits {
+    recipe: Recipe
+}
+
+export interface FoodData {
+    hits: Hits[]
+    _links: {
+        next: {
+          href: string;
+        };
+    }
+}
+
+export type RecipeData = Hits[]
+
