@@ -98,7 +98,7 @@ export function HomeRecipe({
             </Grid>
           </Grid>
 
-        {recipeData.length > 0 && (
+        {recipeData && recipeData.length > 0 && (
           <Grid>
             <Grid container justifyContent={"center"} sx={{marginTop: 5}}>
                 {recipeData.map((hit, index) => {
