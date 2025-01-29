@@ -225,7 +225,7 @@ const handleRemoveNote: HandleRemoveNote = (note, recipe) =>{
 }
 
   return (
-    <Container disableGutters>
+    <Container maxWidth={false} disableGutters>
       <AppBar
         position="fixed"
         sx={{
